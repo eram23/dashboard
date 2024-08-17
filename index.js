@@ -1,7 +1,7 @@
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     .then(res => res.json())
     .then(data => {
-        document.body.style.backgroundImage = `url(${data.urls.regular})`
+        document.body.style.backgroundImage = `url(${data.urls.full})`
 		document.getElementById("author").textContent = `By: ${data.user.name}`
     })
     .catch(err => {
@@ -11,6 +11,8 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 		document.getElementById("author").textContent = `By: Dodi Achmad`
     })
 
+
+// GETS DOGECOIN DATA AND RENDERS IT
 fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     .then(res => {
         if (!res.ok) {
@@ -31,13 +33,14 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     })
     .catch(err => console.error(err))
 
+// UPDATES TIME EVERY SECOND INTERVAL
 function getCurrentTime() {
     const date = new Date()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
 }
-
 setInterval(getCurrentTime, 1000)
 
+// GETS LOCATION OF USER AND RENDERS WEATHER
 navigator.geolocation.getCurrentPosition(position => {
     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
         .then(res => {
